@@ -182,6 +182,7 @@
 - [Typo Detector with OpenVINO™](./typo-detector/typo-detector.ipynb)
 - [Image Generation with Tiny-SD and OpenVINO™](./tiny-sd-image-generation/tiny-sd-image-generation.ipynb)
 - [Selfie Segmentation using TFLite and OpenVINO](./tflite-selfie-segmentation/tflite-selfie-segmentation.ipynb)
+- [Text to Image pipeline and OpenVINO with Generate API](./text-to-image-genai/text-to-image-genai.ipynb)
 - [Table Question Answering using TAPAS and OpenVINO™](./table-question-answering/table-question-answering.ipynb)
 - [Line-level text detection with Surya](./surya-line-level-text-detection/surya-line-level-text-detection.ipynb)
 - [Image to Video Generation with Stable Video Diffusion](./stable-video-diffusion/stable-video-diffusion.ipynb)
