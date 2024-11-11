@@ -224,6 +224,7 @@
 - [Visual-language assistant with Phi3-Vision and OpenVINO](./phi-3-vision/phi-3-vision.ipynb)
 - [Text-to-speech (TTS) with Parler-TTS and OpenVINO](./parler-tts-text-to-speech/parler-tts-text-to-speech.ipynb)
 - [Paint By Example: Exemplar-based Image Editing with Diffusion Models](./paint-by-example/paint-by-example.ipynb)
+- [Text-to-Speech synthesis using OuteTTS and OpenVINO](./outetts-text-to-speech/outetts-text-to-speech.ipynb)
 - [Optical Character Recognition (OCR) with OpenVINO™](./optical-character-recognition/optical-character-recognition.ipynb)
 - [Voice tone cloning with OpenVoice and OpenVINO](./openvoice/openvoice.ipynb)
 - [Universal Segmentation with OneFormer and OpenVINO](./oneformer-segmentation/oneformer-segmentation.ipynb)
