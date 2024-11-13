@@ -101,6 +101,7 @@
 - [Post-Training Quantization of PyTorch models with NNCF](./pytorch-post-training-quantization-nncf/pytorch-post-training-quantization-nncf.ipynb)
 - [Optimize Preprocessing](./optimize-preprocessing/optimize-preprocessing.ipynb)
 - [OpenVINO Tokenizers: Incorporate Text Processing Into OpenVINO Pipelines](./openvino-tokenizers/openvino-tokenizers.ipynb)
+- [Convert models from ModelScope to OpenVINO](./modelscope-to-openvino/modelscope-to-openvino.ipynb)
 - [Hello Model Server](./model-server/model-server.ipynb)
 - [Quantize NLP models with Post-Training Quantization ​in NNCF](./language-quantize-bert/language-quantize-bert.ipynb)
 - [Quantization of Image Classification Models](./image-classification-quantization/image-classification-quantization.ipynb)
