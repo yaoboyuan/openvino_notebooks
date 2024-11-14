@@ -19,6 +19,7 @@
 - [Automatic speech recognition using Whisper and OpenVINO with Generate API](./whisper-asr-genai/whisper-asr-genai.ipynb)
 - [Wav2Lip: Accurately Lip-syncing Videos and OpenVINO](./wav2lip/wav2lip.ipynb)
 - [Image Generation with Tiny-SD and OpenVINO™](./tiny-sd-image-generation/tiny-sd-image-generation.ipynb)
+- [Text to Image pipeline and OpenVINO with Generate API](./text-to-image-genai/text-to-image-genai.ipynb)
 - [Line-level text detection with Surya](./surya-line-level-text-detection/surya-line-level-text-detection.ipynb)
 - [Image to Video Generation with Stable Video Diffusion](./stable-video-diffusion/stable-video-diffusion.ipynb)
 - [Stable Fast 3D Mesh Reconstruction and OpenVINO](./stable-fast-3d/stable-fast-3d.ipynb)
