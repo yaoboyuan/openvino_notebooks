@@ -4,9 +4,14 @@ If a question does not make any sense or is not factually coherent, explain why 
 """
 
 DEFAULT_SYSTEM_PROMPT_CHINESE = """\
-你是一个乐于助人、尊重他人以及诚实可靠的助手。在安全的情况下，始终尽可能有帮助地回答。 您的回答不应包含任何有害、不道德、种族主义、性别歧视、有毒、危险或非法的内容。请确保您的回答在社会上是公正的和积极的。
-如果一个问题没有任何意义或与事实不符，请解释原因，而不是回答错误的问题。如果您不知道问题的答案，请不要分享虚假信息。另外，答案请使用中文。\
+你是一個樂於助人、尊重他人以及誠實可靠的助手。在安全的情況下，始終盡可能有幫助地回答。 您的回答不應包含任何有害、不道德、種族主義、性別歧視、有毒、危險或非法的內容。請確保您的回答在社會上是公正的和積極的。
+如果一個問題沒有任何意義或與事實不符，請解釋原因，而不是回答錯誤的問題。如果您不知道問題的答案，請不要分享虛假信息。另外，答案請使用中文。\
 """
+
+# DEFAULT_SYSTEM_PROMPT_CHINESE = """\
+# 你是一个乐于助人、尊重他人以及诚实可靠的助手。在安全的情况下，始终尽可能有帮助地回答。 您的回答不应包含任何有害、不道德、种族主义、性别歧视、有毒、危险或非法的内容。请确保您的回答在社会上是公正的和积极的。
+# 如果一个问题没有任何意义或与事实不符，请解释原因，而不是回答错误的问题。如果您不知道问题的答案，请不要分享虚假信息。另外，答案请使用中文。\
+# """
 
 DEFAULT_SYSTEM_PROMPT_JAPANESE = """\
 あなたは親切で、礼儀正しく、誠実なアシスタントです。 常に安全を保ちながら、できるだけ役立つように答えてください。 回答には、有害、非倫理的、人種差別的、性差別的、有毒、危険、または違法なコンテンツを含めてはいけません。 回答は社会的に偏見がなく、本質的に前向きなものであることを確認してください。
@@ -18,8 +23,12 @@ You are an assistant for question-answering tasks. Use the following pieces of r
 """
 
 DEFAULT_RAG_PROMPT_CHINESE = """\
-基于以下已知信息，请简洁并专业地回答用户的问题。如果无法从中得到答案，请说 "根据已知信息无法回答该问题" 或 "没有提供足够的相关信息"。不允许在答案中添加编造成分。另外，答案请使用中文。\
+基於以下已知信息，請簡潔並專業地回答用戶的問題。如果無法從中得到答案，請說 "根據已知信息無法回答該問題" 或 "沒有提供足夠的相關信息"。不允許在答案中添加編造成分。另外，答案請使用中文。\
 """
+
+# DEFAULT_RAG_PROMPT_CHINESE = """\
+# 基于以下已知信息，请简洁并专业地回答用户的问题。如果无法从中得到答案，请说 "根据已知信息无法回答该问题" 或 "没有提供足够的相关信息"。不允许在答案中添加编造成分。另外，答案请使用中文。\
+# """
 
 
 def red_pijama_partial_text_processor(partial_text, new_text):
@@ -377,6 +386,46 @@ SUPPORTED_LLM_MODELS = {
         },
     },
     "Chinese": {
+         "llama-3.2-1b-instruct": {
+            "model_id": "meta-llama/Llama-3.2-1B-Instruct",
+            "start_message": DEFAULT_SYSTEM_PROMPT_CHINESE,
+            "stop_tokens": ["<|eot_id|>"],
+            "has_chat_template": True,
+            "start_message": " <|start_header_id|>system<|end_header_id|>\n\n" + DEFAULT_SYSTEM_PROMPT_CHINESE + "<|eot_id|>",
+            "history_template": "<|start_header_id|>user<|end_header_id|>\n\n{user}<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n{assistant}<|eot_id|>",
+            "current_message_template": "<|start_header_id|>user<|end_header_id|>\n\n{user}<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n{assistant}",
+            "rag_prompt_template": f"<|start_header_id|>system<|end_header_id|>\n\n{DEFAULT_RAG_PROMPT_CHINESE}<|eot_id|>"
+            + """<|start_header_id|>user<|end_header_id|>
+            
+            
+            問題: {input}
+            已之內容: {context}
+            回答:<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+            
+            """,
+            "completion_to_prompt": llama3_completion_to_prompt,
+        },
+        "llama-3.2-3b-instruct": {
+            "model_id": "meta-llama/Llama-3.2-3B-Instruct",
+            "start_message": DEFAULT_SYSTEM_PROMPT_CHINESE,
+            "stop_tokens": ["<|eot_id|>"],
+            "has_chat_template": True,
+            "start_message": " <|start_header_id|>system<|end_header_id|>\n\n" + DEFAULT_SYSTEM_PROMPT_CHINESE + "<|eot_id|>",
+            "history_template": "<|start_header_id|>user<|end_header_id|>\n\n{user}<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n{assistant}<|eot_id|>",
+            "current_message_template": "<|start_header_id|>user<|end_header_id|>\n\n{user}<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n{assistant}",
+            "rag_prompt_template": f"<|start_header_id|>system<|end_header_id|>\n\n{DEFAULT_RAG_PROMPT_CHINESE}<|eot_id|>"
+            + """<|start_header_id|>user<|end_header_id|>
+            
+            
+            問題: {input}
+            已知內容: {context}
+            回答:<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+            
+            """,
+            "completion_to_prompt": llama3_completion_to_prompt,
+        },
         "qwen2.5-0.5b-instruct": {
             "model_id": "Qwen/Qwen2.5-0.5B-Instruct",
             "remote_code": False,
