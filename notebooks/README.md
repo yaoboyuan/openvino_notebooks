@@ -206,7 +206,7 @@
 - [Image Generation with Stable Diffusion and IP-Adapter](./stable-diffusion-ip-adapter/stable-diffusion-ip-adapter.ipynb)
 - [Image generation with Stable Cascade and OpenVINO](./stable-cascade-image-generation/stable-cascade-image-generation.ipynb)
 - [Sound Generation with Stable Audio Open and OpenVINO™](./stable-audio/stable-audio.ipynb)
-- [Text Generation via Speculative Decoding and OpenVINO™](./speculative-sampling/speculative-sampling.ipynb)
+- [Text Generation via Speculative Decoding using FastDraft and OpenVINO™](./speculative-sampling/speculative-sampling.ipynb)
 - [Sound Generation with AudioLDM2 and OpenVINO™](./sound-generation-audioldm2/sound-generation-audioldm2.ipynb)
 - [SoftVC VITS Singing Voice Conversion and OpenVINO™](./softvc-voice-conversion/softvc-voice-conversion.ipynb)
 - [One Step Sketch to Image translation with pix2pix-turbo and OpenVINO](./sketch-to-image-pix2pix-turbo/sketch-to-image-pix2pix-turbo.ipynb)
