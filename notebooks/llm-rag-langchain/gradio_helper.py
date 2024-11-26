@@ -12,9 +12,7 @@ chinese_examples = [
     ["英特尔博锐® Enterprise系统提供哪些功能？"],
 ]
 dcai_day_examples = [
-    ["英特爾®酷睿™ Ultra處理器可以降低多少功耗？"],
-    ["相比英特爾之前的移動處理器產品，英特爾®酷睿™ Ultra處理器的AI推理性能提升了多少？"],
-    ["英特爾博銳® Enterprise系統提供哪些功能？"]
+    ["Intel Xeon 6相對於前一代的產品有些什麼特色改進或者是增強的地方?"]
 ]
 cwa_examples = [
     ["中央氣象局三大業務目標有哪些?"],
@@ -57,7 +55,7 @@ def make_demo(
         examples = chinese_examples if (language == "Chinese") else english_examples
 
     if demo_event == 'Data Center and AI Day':
-        text_example_path = "text_example_tw.pdf"
+        text_example_path = "xeon6.pdf"
     elif demo_event == '中央氣象局':
         text_example_path = "中央氣象局基礎建設計畫.pdf"
     else:
@@ -69,10 +67,14 @@ def make_demo(
 
     with gr.Blocks(
         theme=gr.themes.Soft(),
-        css=".disclaimer {font-variant-caps: all-small-caps;}",
+        css = """
+        body, * {
+        font-family: 'Calibri'
+        }
+        """
     ) as demo:
         gr.Markdown(f"""<h1><center>{demo_event} RAG Demo on Intel Xeon</center></h1>""")
-        gr.Markdown(f"""<center>Powered by OpenVINO and {model_name} </center>""")
+        gr.Markdown(f"""<center>Powered by {model_name} </center>""")
         with gr.Row():
             with gr.Column(scale=1):
                 docs = gr.File(
@@ -187,7 +189,7 @@ def make_demo(
                                 )
             with gr.Column(scale=4):
                 chatbot = gr.Chatbot(
-                    height=800,
+                    height=400,
                     label="Step 3: Input Query",
                 )
                 with gr.Row():
@@ -205,7 +207,7 @@ def make_demo(
                             stop = gr.Button("Stop")
                             clear = gr.Button("Clear")
                 gr.Examples(examples, inputs=msg, label="Click on any example and press the 'Submit' button")
-                retriever_argument = gr.Accordion("Retriever Configuration", open=True)
+                retriever_argument = gr.Accordion("Retriever Configuration", open=False)
                 with retriever_argument:
                     with gr.Row():
                         with gr.Row():
@@ -222,7 +224,7 @@ def make_demo(
                         with gr.Row():
                             search_method = gr.Dropdown(
                                 ["similarity_score_threshold", "similarity", "mmr"],
-                                value="similarity_score_threshold",
+                                value="similarity",
                                 label="Searching Method",
                                 info="Method used to search vector store",
                                 multiselect=False,
