@@ -11,8 +11,14 @@ chinese_examples = [
     ["相比英特尔之前的移动处理器产品，英特尔®酷睿™ Ultra处理器的AI推理性能提升了多少？"],
     ["英特尔博锐® Enterprise系统提供哪些功能？"],
 ]
-dcai_day_examples = [
+hans_examples = [
     ["Intel Xeon 6相對於前一代的產品有些什麼特色改進或者是增強的地方?"]
+]
+
+dcai_day_examples = [
+    ["英特爾®酷睿™ Ultra處理器可以降低多少功耗？"],
+    ["相比英特爾之前的移動處理器產品，英特爾®酷睿™ Ultra處理器的AI推理性能提升了多少？"],
+    ["英特爾博銳® Enterprise系統提供哪些功能？"],
 ]
 cwa_examples = [
     ["中央氣象局三大業務目標有哪些?"],
@@ -51,13 +57,17 @@ def make_demo(
         examples = dcai_day_examples
     elif demo_event == '中央氣象局':
         examples = cwa_examples
+    elif demo_event == 'Hans':
+        examples = hans_examples
     else:
         examples = chinese_examples if (language == "Chinese") else english_examples
 
     if demo_event == 'Data Center and AI Day':
-        text_example_path = "xeon6.pdf"
+        text_example_path = "text_example_tw.pdf"
     elif demo_event == '中央氣象局':
         text_example_path = "中央氣象局基礎建設計畫.pdf"
+    elif demo_event == 'Hans':
+        text_example_path = "xeon6.pdf"
     else:
         if language == "English":
             text_example_path = "text_example_en.pdf"
@@ -69,12 +79,19 @@ def make_demo(
         theme=gr.themes.Soft(),
         css = """
         body, * {
-        font-family: 'Calibri'
+            font-family: 'Calibri'
         }
         """
     ) as demo:
-        gr.Markdown(f"""<h1><center>{demo_event} RAG Demo on Intel Xeon</center></h1>""")
-        gr.Markdown(f"""<center>Powered by {model_name} </center>""")
+        gr.Markdown(f"""<h1><center>Data Center and AI Day RAG Demo on Intel Xeon</center></h1>""")
+        with gr.Row():
+            with gr.Column(scale=1):
+                model_selector = gr.Dropdown(
+                    choices=["llama-3.2-3b-instruct", "qwen2.5-7b-instruct", "chatglm3-6b"],
+                    value="llama-3.2-3b-instruct",
+                    label="Select Model",
+                    interactive=True,
+                )
         with gr.Row():
             with gr.Column(scale=1):
                 docs = gr.File(
@@ -109,7 +126,7 @@ def make_demo(
 
                     chunk_size = gr.Slider(
                         label="Chunk size",
-                        value=400,
+                        value=800,
                         minimum=50,
                         maximum=2000,
                         step=50,
@@ -119,7 +136,7 @@ def make_demo(
 
                     chunk_overlap = gr.Slider(
                         label="Chunk overlap",
-                        value=50,
+                        value=100,
                         minimum=0,
                         maximum=400,
                         step=10,
