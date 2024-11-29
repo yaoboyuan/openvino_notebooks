@@ -126,7 +126,7 @@ def make_demo(
 
                     chunk_size = gr.Slider(
                         label="Chunk size",
-                        value=800,
+                        value=1000,
                         minimum=50,
                         maximum=2000,
                         step=50,
