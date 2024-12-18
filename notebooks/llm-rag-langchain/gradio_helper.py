@@ -26,6 +26,12 @@ cwa_examples = [
     ["擴增大量資料儲存量能的計畫"],
 ]
 
+cisco_examples = [
+    ["英特爾®酷睿™ Ultra處理器可以降低多少功耗？"],
+    ["相比英特爾之前的移動處理器產品，英特爾®酷睿™ Ultra處理器的AI推理性能提升了多少？"],
+    ["英特爾博銳® Enterprise系統提供哪些功能？"],
+]
+
 def clear_files():
     return "Vector Store is Not ready"
 
@@ -59,6 +65,8 @@ def make_demo(
         examples = cwa_examples
     elif demo_event == 'Hans':
         examples = hans_examples
+    elif demo_event == 'Cisco':
+        examples = cisco_examples
     else:
         examples = chinese_examples if (language == "Chinese") else english_examples
 
@@ -68,6 +76,8 @@ def make_demo(
         text_example_path = "中央氣象局基礎建設計畫.pdf"
     elif demo_event == 'Hans':
         text_example_path = "xeon6.pdf"
+    elif demo_event == 'Cisco':
+        text_example_path = "text_example_tw.pdf"
     else:
         if language == "English":
             text_example_path = "text_example_en.pdf"
@@ -83,7 +93,7 @@ def make_demo(
         }
         """
     ) as demo:
-        gr.Markdown(f"""<h1><center>Data Center and AI Day RAG Demo on Intel Xeon</center></h1>""")
+        gr.Markdown(f"""<h1><center>{demo_event} RAG Demo on Intel Xeon</center></h1>""")
         with gr.Row():
             with gr.Column(scale=1):
                 model_selector = gr.Dropdown(
