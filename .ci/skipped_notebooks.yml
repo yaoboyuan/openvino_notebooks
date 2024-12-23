@@ -562,3 +562,7 @@
   skips:
     - os:
         - macos-13
+- notebook: notebooks/multimodal-rag/multimodal-rag-llamaindex.ipynb
+  skips:
+    - os:
+        - macos-13

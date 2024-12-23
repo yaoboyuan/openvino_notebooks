@@ -613,6 +613,7 @@ OpenVINO
 openvino
 OpenVino
 OpenVINO's
+OpenVINOMultiModal
 openvoice
 OpenVoice
 OpenVoiceBaseClass
@@ -996,6 +997,7 @@ VITS
 vitt
 VL
 vl
+VLM
 VLModel
 VM
 Vladlen
@@ -1042,6 +1044,7 @@ YOLOv
 yolov
 Youri
 youri
+YouTube
 Zafrir
 ZavyChromaXL
 Zongyuan
