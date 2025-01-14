@@ -1,37 +1,6 @@
 from typing import Callable, Literal
 import gradio as gr
 
-english_examples = [
-    ["How much power consumption can Intel® Core™ Ultra Processors help save?"],
-    ["Compared to Intel’s previous mobile processor, what is the advantage of Intel® Core™ Ultra Processors for Artificial Intelligence?"],
-    ["What can Intel vPro® Enterprise systems offer?"],   
-]
-chinese_examples = [
-    ["英特尔®酷睿™ Ultra处理器可以降低多少功耗？"],
-    ["相比英特尔之前的移动处理器产品，英特尔®酷睿™ Ultra处理器的AI推理性能提升了多少？"],
-    ["英特尔博锐® Enterprise系统提供哪些功能？"],
-]
-hans_examples = [
-    ["Intel Xeon 6相對於前一代的產品有些什麼特色改進或者是增強的地方?"]
-]
-
-dcai_day_examples = [
-    ["英特爾®酷睿™ Ultra處理器可以降低多少功耗？"],
-    ["相比英特爾之前的移動處理器產品，英特爾®酷睿™ Ultra處理器的AI推理性能提升了多少？"],
-    ["英特爾博銳® Enterprise系統提供哪些功能？"],
-]
-cwa_examples = [
-    ["中央氣象局三大業務目標有哪些?"],
-    ["更新高速運算電腦的計畫是?"],
-    ["擴增大量資料儲存量能的計畫"],
-]
-
-cisco_examples = [
-    ["英特爾®酷睿™ Ultra處理器可以降低多少功耗？"],
-    ["相比英特爾之前的移動處理器產品，英特爾®酷睿™ Ultra處理器的AI推理性能提升了多少？"],
-    ["英特爾博銳® Enterprise系統提供哪些功能？"],
-]
-
 def clear_files():
     return "Vector Store is Not ready"
 
@@ -51,7 +20,9 @@ def handle_user_message(message, history):
 
 
 def make_demo(
-    demo_event,
+    event_name,
+    example_path,
+    example,
     load_doc_fn: Callable,
     run_fn: Callable,
     stop_fn: Callable,
@@ -59,31 +30,6 @@ def make_demo(
     model_name: str,
     language: Literal["English", "Chinese"] = "English",
 ):
-    if demo_event == 'Data Center and AI Day':
-        examples = dcai_day_examples
-    elif demo_event == '中央氣象局':
-        examples = cwa_examples
-    elif demo_event == 'Hans':
-        examples = hans_examples
-    elif demo_event == 'Cisco':
-        examples = cisco_examples
-    else:
-        examples = chinese_examples if (language == "Chinese") else english_examples
-
-    if demo_event == 'Data Center and AI Day':
-        text_example_path = "text_example_tw.pdf"
-    elif demo_event == '中央氣象局':
-        text_example_path = "中央氣象局基礎建設計畫.pdf"
-    elif demo_event == 'Hans':
-        text_example_path = "xeon6.pdf"
-    elif demo_event == 'Cisco':
-        text_example_path = "text_example_tw.pdf"
-    else:
-        if language == "English":
-            text_example_path = "text_example_en.pdf"
-        else:
-            text_example_path = "text_example_cn.pdf"
-        
 
     with gr.Blocks(
         theme=gr.themes.Soft(),
@@ -93,7 +39,10 @@ def make_demo(
         }
         """
     ) as demo:
-        gr.Markdown(f"""<h1><center>{demo_event} RAG Demo on Intel Xeon</center></h1>""")
+        if event_name:
+            gr.Markdown(f"""<h1><center>{event_name} RAG Demo on Intel Xeon</center></h1>""")
+        else:
+            gr.Markdown(f"""<h1><center>RAG Demo on Intel Xeon</center></h1>""")
         with gr.Row():
             with gr.Column(scale=1):
                 model_selector = gr.Dropdown(
@@ -106,7 +55,7 @@ def make_demo(
             with gr.Column(scale=1):
                 docs = gr.File(
                     label="Step 1: Load text files",
-                    value=[text_example_path],
+                    value=[example_path],
                     file_count="multiple",
                     file_types=[
                         ".csv",
@@ -233,7 +182,7 @@ def make_demo(
                             submit = gr.Button("Submit", variant="primary")
                             stop = gr.Button("Stop")
                             clear = gr.Button("Clear")
-                gr.Examples(examples, inputs=msg, label="Click on any example and press the 'Submit' button")
+                gr.Examples(example, inputs=msg, label="Click on any example and press the 'Submit' button")
                 retriever_argument = gr.Accordion("Retriever Configuration", open=False)
                 with retriever_argument:
                     with gr.Row():
